@@ -36,7 +36,7 @@ function ProductForm() {
   const fetchProduct = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`http://localhost:8080/api/products/${id}`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setFormData(response.data);
@@ -68,11 +68,11 @@ function ProductForm() {
       };
 
       if (isEditMode) {
-        await axios.put(`http://localhost:8080/api/products/${id}`, data, {
+        await axios.put(`${process.env.REACT_APP_API_BASE_URL}/products/${id}`, data, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.post('http://localhost:8080/api/products', data, {
+        await axios.post(`${process.env.REACT_APP_API_BASE_URL}/products`, data, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
